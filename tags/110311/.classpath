@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="desc"/>
+	<classpathentry kind="src" path="resources"/>
+	<classpathentry kind="var" path="UIMA_HOME/lib/uima-core.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program Files/apache-uima/docs/api"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="UIMA_HOME/lib/uima-cpe.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file://home/hernandez/Bureau/hernandez/workspace/CURRENT/un-lina-uima-user-dev-env/un-lina-uima-user-dev-env/applications/apache-uimaj/docs/api"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="UIMA_HOME/lib/uima-document-annotation.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file://home/hernandez/Bureau/hernandez/workspace/CURRENT/un-lina-uima-user-dev-env/un-lina-uima-user-dev-env/applications/apache-uimaj/docs/api"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="UIMA_HOME/lib/uima-tools.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file://home/hernandez/Bureau/hernandez/workspace/CURRENT/un-lina-uima-user-dev-env/un-lina-uima-user-dev-env/applications/apache-uimaj/docs/api"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="UIMA_HOME/addons/annotator/SnowballAnnotator/lib/uima-an-snowball.jar"/>
+	<classpathentry kind="var" path="UIMA_HOME/addons/annotator/WhitespaceTokenizer/lib/uima-an-wst.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/uima-common"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
