@@ -1,0 +1,191 @@
+# UIMA Text Segmenter
+# Copyright (C) 2011  Nicolas Hernandez
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+# 
+#   http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.  
+#
+# Fichier README
+# 2011-02-28  Nicolas Hernandez  <nicolas.hernandez@gmail.com>
+
+
+OVERVIEW
+
+	For now, *UIMA Text Segmenter* is a [http://uima.apache.org/ UIMA] *wrapper 
+	for the java implementations of the segmentation algorithms C99 and 
+	TextTiling, written by Freddy Choi*, and used in the experiments described 
+	in _choi_2000naacl_ (see below). These algorithms offer a text segmentation analysis
+	at the discourse level essentially based on lexical cohesion measures.
+	
+	The UIMA wrapper uses the `uk.ac.man.cs.choif` package which comes from the 
+	`C99-1.2-release.tgz` file, initially released by Freddy Choi.
+	This package was released under the following license:
+	_Free for educational, research and other non-profit making uses only. 
+	Copyright 1999._
+	All the source code is included in the current uima-text-segmenter release
+	except the implementations of the Jeff Reynar's dotplotting algorithm 
+	(reynar_1994, reynar_1998, reynar_1999) and Min-Yen Kan et al.'s Segmenter 
+	(kan_et_al_1998) which were removed.
+		
+	License attached to the `fr.univnantes.lina.uima.textSegmenter` package
+	is _Apache-2.0_.
+
+	Consult the web page http://code.google.com/p/uima-text-segmenter for more information.
+  
+	{{{
+	@InProceedings{choi_2000naacl,
+  		author =       {Freddy Y. Y. Choi},
+  		title =        {Advances in domain independent linear text segmentation},
+  		booktitle =    {Proceedings of NAACL'00},
+  		year =         {2000},
+  		address =      {Seattle, USA},
+  		month =        {April},
+  		OPTannote =    {"choi00.ps.gz"}
+	}
+	}}}  
+	
+FEATURES
+
+
+INSTALL & RUN
+
+Si vous l'utilisez en tant que jar, alors 
+  * créer un descripteur qui étende `desc/textSegmenter/C99AE` ou 
+  `desc/textSegmenter/JTextTileAE` suivant que vous souhaitez utiliser C99 ou 
+  JTextTile. 
+  * Reportez vous à la section `parameters` ci-dessous pour connaître les 
+  paramètres à étendre puis à définir.
+
+Si vous récupérez les sources comme un projet Eclipse
+Alors ajouter dans le build path
+  * desc
+  * resources
+  * UIMA_HOME/addons/annotator/SnowballAnnotator/lib/uima-an-snowball.jar
+  * UIMA_HOME/addons/annotator/WhitespaceTokenizer/lib/uima-an-wst.jar
+
+Vous pouvez utiliser ensuite le documentAnalyser sur votre descripteur précédemment créé ou bien partir du descripteur exemple (voir Section EXAMPLE).
+
+
+INSTALLATION PROBLEMS
+
+Si vous avez un problème d'Access Restriction sur la classe sun.misc ou une de ses méthodes, 
+Alors Properties > Java build path > Libraries > Remove JRE System Library > Add Library > JRE System Library 
+(vous pouvez essayer de recharger le même par exemple le default) ; perso cela marche avec le jdk.1.6.17
+
+Le code code source de `uk.ac.man.cs.choif.nlp.seg.linear.JTextTile` compile avec 
+une erreur. Cette classe étant réécrite (voir section Description) ce n'est pas 
+génant pour le développement ou l'utilisation du wrapper.
+L'erreur se solutionne en initialisant à `null` la variable S dans la ligne `protected Stopword S = new Stopword();` 
+
+	
+	
+DESCRIPTION
+
+	Les descripteurs des AE sont `desc/textSegmenter/C99AE` et `desc/textSegmenter/JTextTileAE`. 
+	Ils fonctionnent respectivement avec les classes `fr.univnantes.lina.uima.textSegmenter.C99.C99AE` 
+	et `fr.univnantes.lina.uima.textSegmenter.JTextTile.JTextTileAE`.
+	 
+	`desc/textSegmenter/TextSegmenterTS` définit un type d'annotation par 
+	défaut correspondant à un analyseur de segmentation de texte au niveau discursif.
+	Néanmoins `C99AE` et `JTextTileAE` définissent leur propre type.
+
+	L'encapsulation de la bibliothèque du Choi a nécessité de faire des 
+	modifications dans la classe `uk.ac.man.cs.choif.nlp.seg.linear.C99` 
+	et `uk.ac.man.cs.choif.nlp.seg.linear.JTextTiling` de Choi. Certaines 
+	méthodes privées ont été mises publiques et certaines finales ont été 
+	autorisées à être redéfinies dans les sous-classes. Les méthodes main ont 
+	été commentées ainsi que parfois certains constructeurs. 
+	Les deux nouvelles classes sont respectivement `fr.univnantes.lina.uima.textSegmenter.C99.C99LINA` 
+	et `fr.univnantes.lina.uima.textSegmenter.JTextTile.JTextTileLINA`.
+	
+	Nous notons que le code de Choi utilise l'API propriétaire de SUN en 
+	particulier sun.misc.Sort.quicksort. Ce code est disponible dans la rt.jar (java runtimes 
+	(Dans la 1.6 jre/lib/rt.jar)) avec un access restriction). Cette API ne devrait pas être utilisé. 
+	JDK l'utilise pour des besoins internes néanmoins. Pour le supprimer... ici une piste 
+	http://etutorials.org/Programming/Java+performance+tuning/Chapter+9.+Sorting/9.1+Avoiding+Unnecessary+Sorting+Overhead/
+
+	La liste des mots vides pour le français est issue de http://snowball.tartarus.org
+	wget http://snowball.tartarus.org/algorithms/french/stop.txt ; cat stop.txt|iconv -f iso-8859-1 -t utf8 | perl -ne 'chomp;/^([^ ]+)/; print "$1\n";' |grep -v '^$' > motsVides-fr.csv
+
+LICENCES	
+	
+	See the Licenses* files
+	
+	
+PARAMETERS
+
+	Ci-dessous les paramètres communs et spécifiques que C99 et JTextile utilisent. 
+
+	*Input|Output parameters* (Common to `desc/textSegmenter/C99AE` and `desc/textSegmenter/JTextTileAE`)
+		* `InputView` CAS view to proceed. By default this view will be the `_InitialView`. If you do not now, then leaving it empty will probably be a good choice.
+		* `InputSentenceAnnotation` Annotation type which corresponds to a sentence unit. By default `org.apache.uima.SentenceAnnotation`
+		* `InputWordAnnotation`	Annotation type which corresponds to a word unit. By default will be `org.apache.uima.TokenAnnotation`
+		* `InputWordFeature` Corresponds to the word token feature to consider. Default is `coveredText` but can be set to `stem` depending on the prior AE.
+		* `OutputSegmentAnnotation` Annotation to create for each text segment detected. By default it is set to  `fr.univnantes.lina.uima.textSegmenter.types.SegmentAnnotation`. C99AE provides also a C99SegmentAnnotation while JTextTileAE provides a JTextTileAnnotation.
+		* `StopWordFile` path to a stop word file
+		
+	*Algorithm parameters specific to `desc/textSegmenter/C99AE`*
+		* `NumberOfSegments` 	Number of segments to make, if -1 then let the algorithm decide.		
+		* `RankingMaskSize`	Size of ranking mask rank to smooth the similarity matrix of all the sentences (Apply hard ranking (replace pixel value with the proportion 
+ of neighbouring values its greater than) to matrix using a S x S mask). It is said >=1 in the main method description and >=3 in the segment* method description. Surely should be >=3 to be effective. 
+		* `TermFrequencyWeight`		Compute sentence similarity taking into account of term frequency (actually the entropy based on the token occurrence probability over all the sentences)
+		
+	*Algorithm parameters specific to `desc/textSegmenter/JTextTileAE`*
+		* `WindowSize` Window size in number of words. Hearst suggested 30. Choi claimed  the same but its default value was 100 in its implementation. It depends on the number of words per sentence/proposition and also if we words with raw words, post tag filtered words, stems... and from the text genre...
+Set it to -1 if you want the program to determine automatically the "best" value. The computation is based on  simple homemade empirical heuristic which set the best value to 3 times the average size of a sentence in terms of words.
+		* `StepSize Size` of the step to shift the window. Hearst suggested 5. Choi claimed the same but its default value was 10 in its implementation. It depends on the number of words per sentence/proposition and also if we words with raw words, post tag filtered words, stems... and from the text genre...
+Set it to -1 if you want the program to determine automatically the "best" value. The computation is based on  simple homemade empirical heuristic which set the best value to 1 time the average size of a sentence in terms of words. 
+
+
+EXAMPLES
+
+	`desc/textSegmenter/wst-snowball-C99-JTextTilingAAE.xml` constitue un exemple d'utilisation des descripteurs C99AE et JTextileAE.
+	Il s'agit d'un aggregate qui utilise Apache WhitespaceTokenizer et Apache SnowballAnnotator pour fournir les annotations de phrases, mots et stem de mots.
+	Cet exemple exécute à la fois C99 et JTextTiling l'un à la suite de l'autre. En pratique ces deux analyseurs n'ont aucune dépendance.
+
+	Cet exemple requière l'ajout au classpath de  
+	  * `UIMA_HOME/addons/annotator/SnowballAnnotator/lib/uima-an-snowball.jar`
+      * `UIMA_HOME/addons/annotator/WhitespaceTokenizer/lib/uima-an-wst.jar`
+ 
+	
+TRICKS
+
+MORE INFORMATION ABOUT WHAT IT IS WRAPPED
+
+    The C99 algorithm works as following:
+	Given a document as a list of elementary text blocks (usually tokenised 
+	sentences), segment the document into NumberOfSegments coherent topic 
+	segments. If NumberOfSegments param is -1, the algorithm will decide the 
+	appropriate number of segments by monitoring the rate of increase in 
+	segment density.
+	The main steps are:
+	1. Normalizes the sentences
+	2. Computes a Similarity matrix of all the sentences
+	3. Ranks the matrix (smoothing of each pixel by applying hard ranking 
+	(replace pixel value with the proportion of neighbouring values its greater 
+	than) to matrix using a S x S mask
+	4. Sums of rank matrix
+	5. Divides the matrix diagonal clustering which corresponds to determining 
+	the	boundaries,	the number of boundaries depends on the user parameter (it 
+	can	be done automatically)
+	
+	The TextTiling algorithm works as following:
+	`TODO`
+
+	
+CONTACT
+
+	See the header of this file.
