@@ -21,7 +21,12 @@
 # Fichier ChangeLog
 # 2011-02-28  Nicolas Hernandez  <nicolas.hernandez@gmail.com>
   
-# 2011-02-28 Nicolas Hernandez  <nicolas.hernandez@gmail.com>
+2011-03-13 Nicolas Hernandez  <nicolas.hernandez@gmail.com> non inclu dans le jar en ligne
+  * Mise à jour de certains fichiers après clean et régénération du bin
+  * README: quelques conseils pour la régénération pour éviter des problèmes de compilation
+
+  
+2011-02-28 Nicolas Hernandez  <nicolas.hernandez@gmail.com>
   * Ajout des fichiers  ChangeLog, CREDITS, KNOWN_BUGS, LICENSE, TODO et mise à jour du README
   * Ajour des headers licences aux fichiers src
   * Refactoring des noms des fichiers desc avec les suffixes AE, TS et AAE 
