@@ -16,7 +16,8 @@ public class JTextTile {
 		
 	/* Data sets */
 	protected Sentences C = new RawText(); // A collection for segmentation
-	protected Stopword S = new Stopword(); // A stopword list for noise reduction
+	// Modification from N Hernandez
+	protected Stopword S = null ;//new Stopword(); // A stopword list for noise reduction
 	
 
 	/* Token -> stem dictionary */
