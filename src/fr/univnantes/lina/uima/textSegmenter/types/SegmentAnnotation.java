@@ -10,9 +10,9 @@ import org.apache.uima.jcas.cas.TOP_Type;
 import org.apache.uima.jcas.tcas.Annotation;
 
 
-/** Default Segment annotation
- * Updated by JCasGen Thu Mar 03 00:18:31 CET 2011
- * XML source: /media/MyPassport/current/public/research/UIMA-USER-DEV-ENV/workspace/uima-text-segmenter/desc/textSegmenter/wst-snowball-C99AAE.xml
+/** Default text segmentation annotation
+ * Updated by JCasGen Sun Mar 13 08:13:47 CET 2011
+ * XML source: /media/MyPassport/current/public/research/UIMA-USER-DEV-ENV/workspace/uima-text-segmenter/desc/textSegmenter/TextSegmenterTS.xml
  * @generated */
 public class SegmentAnnotation extends Annotation {
   /** @generated
