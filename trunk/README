@@ -90,6 +90,14 @@ une erreur. Cette classe étant réécrite (voir section Description) ce n'est p
 génant pour le développement ou l'utilisation du wrapper.
 L'erreur se solutionne en initialisant à `null` la variable S dans la ligne `protected Stopword S = new Stopword();` 
 
+Alors que le jar distribué sur le site contient les fichiers binaires, le dépot 
+svn ne les contient pas. Il se peut que vous ayez des erreurs de compilation 
+car tous les binaires n'ont pas été régénérés à partir de vos sources. 
+Commencer d'abord par stopper l'auto build, puis à effectuer un jcasgen sur 
+desc/textSegmenter/TextSegmenterTS.xml, puis un remove/add desc as build source 
+et a la mano build project. A l'aide du navigator, vérifiez vous devez avoir 
+dans le bin les répertoires suivants : fr (avec un sous répertoire types), uk, 
+
 	
 	
 DESCRIPTION
