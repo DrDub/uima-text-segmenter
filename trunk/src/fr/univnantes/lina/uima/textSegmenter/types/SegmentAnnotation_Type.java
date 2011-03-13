@@ -11,8 +11,8 @@ import org.apache.uima.cas.impl.TypeImpl;
 import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
-/** Default Segment annotation
- * Updated by JCasGen Thu Mar 03 00:18:31 CET 2011
+/** Default text segmentation annotation
+ * Updated by JCasGen Sun Mar 13 08:13:47 CET 2011
  * @generated */
 public class SegmentAnnotation_Type extends Annotation_Type {
   /** @generated */
