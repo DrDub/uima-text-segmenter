@@ -1,0 +1,4 @@
+#summary ChangeLog
+#labels Featured
+
+Click here to consult the [https://code.google.com/p/uima-text-segmenter/source/browse/trunk/ChangeLog the current version of the ChangeLog file]
