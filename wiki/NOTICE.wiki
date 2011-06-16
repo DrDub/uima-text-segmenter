@@ -1,0 +1,4 @@
+#summary NOTICE
+#labels Featured
+
+Click here to consult the [https://code.google.com/p/uima-text-segmenter/source/browse/trunk/LICENSE.THIRD-PART the current version of the NOTICE file]
