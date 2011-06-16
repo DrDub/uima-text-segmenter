@@ -1,0 +1,5 @@
+#summary Install
+#labels Featured
+
+
+Click here to consult the [https://code.google.com/p/uima-text-segmenter/source/browse/trunk/INSTALL the current version of the INSTALL file]
