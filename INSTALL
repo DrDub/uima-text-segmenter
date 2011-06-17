@@ -23,36 +23,95 @@
 
 
 
-INSTALL & RUN
+INSTALL INSTRUCTIONS
+	MANDATORY REQUIREMENTS
+	
+		Libraries dependency	 
+		* Add the traditional UIMA libs (uima-core.jar uima-tools.jar 
+		uima-cpe.jar uima-document-annotation.jar) in your BUID/CLASSPATH
+		* Add also the uima-common library in your BUID/CLASSPATH. It is 
+		available at https://code.google.com/p/uima-common/ 
+		* Add also the current project library in your BUID/CLASSPATH (working
+		in it with a Eclipse import do the same)  
+				
+		* Note that if you checkout the project source, the current eclipse .classpath 
+		declares the UIMA jar files via a UIMA_HOME variable and the uima-common file
+		via a project dependency for the uima-common project (also assumed checkout 
+		in your workspace). The best is to remove these declarations and to start with 
+		some news ad hoc to your own workspace.
+		
+	OPTIONAL REQUIREMENTS (essentially for running the example)
+		Libraries dependency
+		* To run the examples, you will need some Apache UIMA addons libraries 
+		available in the classpath, namely wst,	snowball, tagger.
+		Here their path are defined relatively to the UIMA_HOME variable.
+		It assumes that the  UIMA_HOME contains the addons directory.
+		The binary of the addons are available here 
+		http://uima.apache.org/downloads.cgi (See Latest Official Releases)
+		Add UIMA_HOME/addons/annotator/SnowballAnnotator/lib/uima-an-snowball.jar
+  		Add UIMA_HOME/addons/annotator/WhitespaceTokenizer/lib/uima-an-wst.jar
 
-	Si vous l'utilisez en tant que jar, alors 
-  	* créer un descripteur qui étende `desc/textSegmenter/C99AE` ou 
-  	`desc/textSegmenter/JTextTileAE` suivant que vous souhaitez utiliser C99 ou 
-  	JTextTile. 
-  	* Reportez vous à la section `parameters` ci-dessous pour connaître les 
-  	paramètres à étendre puis à définir.
-
-	Si vous récupérez les sources comme un projet Eclipse
-	Alors ajouter dans le build path
-  	* desc
-  	* resources
-  	* UIMA_HOME/addons/annotator/SnowballAnnotator/lib/uima-an-snowball.jar
-  	* UIMA_HOME/addons/annotator/WhitespaceTokenizer/lib/uima-an-wst.jar
-
-	Vous pouvez utiliser ensuite le documentAnalyzer sur votre descripteur précédemment créé 
-	ou bien partir du descripteur exemple (voir Section EXAMPLE).
+		Resources files 
+		* Add in your resource directory (which should be added in your BUID/CLASSPATH) 
+		the stopword files you want to use. For example, the current version comes with
+		a French and an English stop words lists extracted from  http://snowball.tartarus.org
+		wget http://snowball.tartarus.org/algorithms/french/stop.txt -O stop.txt && cat stop.txt|iconv -f iso-8859-1 -t utf8 | perl -ne 'chomp;/^([^ ]+)/; print "$1\n";' | sort | uniq | grep -v '|' | grep -v '^$' > stopWords-fr.csv	
+		wget http://snowball.tartarus.org/algorithms/english/stop.txt -O stop.txt && cat stop.txt|iconv -f iso-8859-1 -t utf8 | perl -ne 'chomp;/^([^ ]+)/; print "$1\n";' | sort | uniq | grep -v '|' | grep -v '^$' > stopWords-en.csv	
 
 
+RUN INSTRUCTIONS
+
+	Before trying to define your own descriptor (and setting so your parameter configuration), 
+	run the descriptor example and check the parameters values of the descriptors examples.
+	It means `desc/textSegmenter/wst-snowball-C99-JTextTilingAAE.xml`, 
+	`desc/textSegmenter/C99AE.xml` and  `desc/textSegmenter/JTextileAE.xml`
+
+	Here we present one way to do it, in particular we propose to run the 
+	segmenter in an Eclipse project having the UIMA Nature by extending 
+	the current C99AE and JTextTileAE descriptors.
+	Since these descriptors defines some parameter values, this imply that
+	if you do not override them, you will have to check that your system is 
+	able to ensure to work with them.
+	This concerns mainly the path to the stopword file, the sentence annotation type, 
+	the token annotation type and its feature name (e.g. coveredText, stem...) 
+	to consider for segmenting.   
+
+	* Create an aggregate descriptor
+	* Add (by name) in the Aggregate tab either the `desc/textSegmenter/C99AE` 
+	descriptor or the `desc/textSegmenter/JTextTileAE` descriptor depending 
+	on what segmenter you want to use: C99 or JTextTile.
+  	* Do not forget to add the output types in the Capabilities tab.
+  	
+  	Since you are extending an AE (which already defines some values), you have to 
+  	* Add in the resource directory of your project, the stopword list you want to use 
+  	and then you have to override the `StopWordFile` component parameter in the
+  	 Parameter tabs of your descriptor file.   
+  	* Both C99AE and JTextTileAE assume to find some sentence and token annotations.
+  	By default they can work with 
+  	`org.apache.uima.SentenceAnnotation` and `org.apache.uima.TokenAnnotation` type. 
+  	So override the component parameter on purpose if your pipeline produces some 
+  	other annotation types.
+  	* The C99AE and JTextTileAE descriptors may define the `InputWordFeature` with `stem` as value.
+  	If your type system does not define this feature for your Token annotation 
+  	and if your pipeline does not produce a value for it then override the component parameter with
+  	`coveredText` as value. This should work if you defined your annotation by extending the
+  	`uima.tcas.Annotation` type.  
+  	* More generally to define your parameters values, override the component parameters 
+  	in your aggregate (see the Parameter tabs of your descriptor file). Consult the 
+  	`parameters` section below to help you to define correct values. 
+
+	
 EXAMPLES
 
-	`desc/textSegmenter/wst-snowball-C99-JTextTilingAAE.xml` constitue un 
-	exemple d'utilisation des descripteurs C99AE et JTextileAE.
-	Il s'agit d'un aggregate qui utilise Apache WhitespaceTokenizer et 
-	Apache SnowballAnnotator pour fournir les annotations de phrases, mots et stem de mots.
-	Cet exemple exécute à la fois C99 et JTextTiling l'un à la suite de l'autre. 
-	En pratique ces deux analyseurs n'ont aucune dépendance.
+	With the DocumentAnalyzer, run the following descriptor
+	`desc/textSegmenter/wst-snowball-C99-JTextTilingAAE.xml` by taking the 
+	uima-examples data as input.
+	This descriptor is an aggregate which runs in pipeline the Apache WhitespaceTokenizer, the  
+	Apache SnowballAnnotator to provide first somes sentences, words and word stems. 
+	Then the pipeline runs both C99AE and JTextileAE.
+	In practice, the analyzers have no dependency.
 
-	Cet exemple requière l'ajout au classpath de  
+	To run this example, do not forget to add the following jar in your CLASS/BUIDPATH.
 	  * `UIMA_HOME/addons/annotator/SnowballAnnotator/lib/uima-an-snowball.jar`
       * `UIMA_HOME/addons/annotator/WhitespaceTokenizer/lib/uima-an-wst.jar`
 
