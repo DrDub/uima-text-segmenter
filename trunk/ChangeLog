@@ -21,7 +21,9 @@
 # Fichier ChangeLog
 # 2011-02-28  Nicolas Hernandez  <nicolas.hernandez@gmail.com>
 
-
+2011-06-17  Nicolas Hernandez  <nicolas.hernandez@gmail.com> commited
+  * add INSTALL file and refactor the README file and modifications comming from uima-common  
+  
 2011-04-29  Nicolas Hernandez  <nicolas.hernandez@gmail.com> not tagged
   * uima-common: répercussions de refactoring en ajoutant dans le même package JCasSofaView, Annotation, AnnotationCollection, Feature et DocumentAnnotation Utilities, et en renommant nombreuses méthodes afin de les rendre plus explicites sur leur rôles
   

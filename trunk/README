@@ -57,49 +57,6 @@ OVERVIEW
 	}
 	}}}  
 	
-FEATURES
-
-
-INSTALL & RUN
-
-Si vous l'utilisez en tant que jar, alors 
-  * créer un descripteur qui étende `desc/textSegmenter/C99AE` ou 
-  `desc/textSegmenter/JTextTileAE` suivant que vous souhaitez utiliser C99 ou 
-  JTextTile. 
-  * Reportez vous à la section `parameters` ci-dessous pour connaître les 
-  paramètres à étendre puis à définir.
-
-Si vous récupérez les sources comme un projet Eclipse
-Alors ajouter dans le build path
-  * desc
-  * resources
-  * UIMA_HOME/addons/annotator/SnowballAnnotator/lib/uima-an-snowball.jar
-  * UIMA_HOME/addons/annotator/WhitespaceTokenizer/lib/uima-an-wst.jar
-
-Vous pouvez utiliser ensuite le documentAnalyser sur votre descripteur précédemment créé ou bien partir du descripteur exemple (voir Section EXAMPLE).
-
-
-INSTALLATION PROBLEMS
-
-Si vous avez un problème d'Access Restriction sur la classe sun.misc ou une de ses méthodes, 
-Alors Properties > Java build path > Libraries > Remove JRE System Library > Add Library > JRE System Library 
-(vous pouvez essayer de recharger le même par exemple le default) ; perso cela marche avec le jdk.1.6.17
-
-Le code code source de `uk.ac.man.cs.choif.nlp.seg.linear.JTextTile` compile avec 
-une erreur. Cette classe étant réécrite (voir section Description) ce n'est pas 
-génant pour le développement ou l'utilisation du wrapper. Néanmoins pour 
-éviter le signal de l'erreur, on a localement édité et  solutionne en 
-initialisant à `null` la variable S dans la ligne `protected Stopword S = new Stopword();` 
-
-Alors que le jar distribué sur le site contient les fichiers binaires, le dépot 
-svn ne les contient pas. Il se peut que vous ayez des erreurs de compilation 
-car tous les binaires n'ont pas été régénérés à partir de vos sources. 
-Commencer d'abord par stopper l'auto build, puis à effectuer un jcasgen sur 
-desc/textSegmenter/TextSegmenterTS.xml, puis un remove/add desc as build source 
-et a la mano build project. A l'aide du navigator, vérifiez vous devez avoir 
-dans le bin les répertoires suivants : fr (avec un sous répertoire types), uk, 
-
-	
 	
 DESCRIPTION
 
@@ -129,48 +86,6 @@ DESCRIPTION
 	La liste des mots vides pour le français est issue de http://snowball.tartarus.org
 	wget http://snowball.tartarus.org/algorithms/french/stop.txt ; cat stop.txt|iconv -f iso-8859-1 -t utf8 | perl -ne 'chomp;/^([^ ]+)/; print "$1\n";' |grep -v '^$' > motsVides-fr.csv
 
-LICENCES	
-	
-	See the Licenses* files
-	
-	
-PARAMETERS
-
-	Ci-dessous les paramètres communs et spécifiques que C99 et JTextile utilisent. 
-
-	*Input|Output parameters* (Common to `desc/textSegmenter/C99AE` and `desc/textSegmenter/JTextTileAE`)
-		* `InputView` CAS view to proceed. By default this view will be the `_InitialView`. If you do not now, then leaving it empty will probably be a good choice.
-		* `InputSentenceAnnotation` Annotation type which corresponds to a sentence unit. By default `org.apache.uima.SentenceAnnotation`
-		* `InputWordAnnotation`	Annotation type which corresponds to a word unit. By default will be `org.apache.uima.TokenAnnotation`
-		* `InputWordFeature` Corresponds to the word token feature to consider. Default is `coveredText` but can be set to `stem` depending on the prior AE.
-		* `OutputSegmentAnnotation` Annotation to create for each text segment detected. By default it is set to  `fr.univnantes.lina.uima.textSegmenter.types.SegmentAnnotation`. C99AE provides also a C99SegmentAnnotation while JTextTileAE provides a JTextTileAnnotation.
-		* `StopWordFile` path to a stop word file
-		
-	*Algorithm parameters specific to `desc/textSegmenter/C99AE`*
-		* `NumberOfSegments` 	Number of segments to make, if -1 then let the algorithm decide.		
-		* `RankingMaskSize`	Size of ranking mask rank to smooth the similarity matrix of all the sentences (Apply hard ranking (replace pixel value with the proportion 
- of neighbouring values its greater than) to matrix using a S x S mask). It is said >=1 in the main method description and >=3 in the segment* method description. Surely should be >=3 to be effective. 
-		* `TermFrequencyWeight`		Compute sentence similarity taking into account of term frequency (actually the entropy based on the token occurrence probability over all the sentences)
-		
-	*Algorithm parameters specific to `desc/textSegmenter/JTextTileAE`*
-		* `WindowSize` Window size in number of words. Hearst suggested 30. Choi claimed  the same but its default value was 100 in its implementation. It depends on the number of words per sentence/proposition and also if we words with raw words, post tag filtered words, stems... and from the text genre...
-Set it to -1 if you want the program to determine automatically the "best" value. The computation is based on  simple homemade empirical heuristic which set the best value to 3 times the average size of a sentence in terms of words.
-		* `StepSize Size` of the step to shift the window. Hearst suggested 5. Choi claimed the same but its default value was 10 in its implementation. It depends on the number of words per sentence/proposition and also if we words with raw words, post tag filtered words, stems... and from the text genre...
-Set it to -1 if you want the program to determine automatically the "best" value. The computation is based on  simple homemade empirical heuristic which set the best value to 1 time the average size of a sentence in terms of words. 
-
-
-EXAMPLES
-
-	`desc/textSegmenter/wst-snowball-C99-JTextTilingAAE.xml` constitue un exemple d'utilisation des descripteurs C99AE et JTextileAE.
-	Il s'agit d'un aggregate qui utilise Apache WhitespaceTokenizer et Apache SnowballAnnotator pour fournir les annotations de phrases, mots et stem de mots.
-	Cet exemple exécute à la fois C99 et JTextTiling l'un à la suite de l'autre. En pratique ces deux analyseurs n'ont aucune dépendance.
-
-	Cet exemple requière l'ajout au classpath de  
-	  * `UIMA_HOME/addons/annotator/SnowballAnnotator/lib/uima-an-snowball.jar`
-      * `UIMA_HOME/addons/annotator/WhitespaceTokenizer/lib/uima-an-wst.jar`
- 
-	
-TRICKS
 
 MORE INFORMATION ABOUT WHAT IT IS WRAPPED
 
@@ -195,6 +110,29 @@ MORE INFORMATION ABOUT WHAT IT IS WRAPPED
 	`TODO`
 
 	
+LICENCES	
+	
+	See the Licenses* files
+
+
+FILES
+
+	ChangeLog	lists all the modifications which have been performed on the project  
+	INSTALL 	(should) contain all the instructions for installing and running the product 
+				(may have some examples)
+	LICENSE		describes  the right how to use the product 
+	NOTICE 		contains the acknowledgment and declares if required the licenses of 
+				the third-part dependencies
+	README		this current file 
+	TODO 		lists the future expected evolutions of the project 
+
+		
 CONTACT
 
-	See the header of this file.
+	If you wish participate to the development of the project 
+	or if you find some bugs, please tell the discussion group.
+
+	Consult http://code.google.com/p/uima-text-segmenter/ for more information.
+
+	Thanks for using this code.		
+		

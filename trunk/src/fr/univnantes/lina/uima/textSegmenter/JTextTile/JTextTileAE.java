@@ -34,8 +34,8 @@ import fr.univnantes.lina.uima.textSegmenter.UIMARawText;
 import fr.univnantes.lina.uima.textSegmenter.C99.C99Parser;
 import fr.univnantes.lina.uima.textSegmenter.types.SegmentAnnotation;
 import fr.univnantes.lina.uima.util.AnalysisEngine;
-import fr.univnantes.lina.uima.util.AnnotationUtilities;
-import fr.univnantes.lina.uima.util.UIMAUtilities;
+import fr.univnantes.lina.uima.util.AnnotationUtils;
+import fr.univnantes.lina.uima.util.UIMAUtils;
 
 
 import uk.ac.man.cs.choif.extend.Debugx;
@@ -236,7 +236,7 @@ public class JTextTileAE extends TextSegmenterAE {
 				if (debug) {
 					System.out.println("Debug:==========");		
 				}
-				AnnotationUtilities.createAnnotation(inputViewJCas, this.getOutputSegmentAnnotation(), segmentBeginOffset, previousSentenceEndOffset);
+				AnnotationUtils.createAnnotation(inputViewJCas, this.getOutputSegmentAnnotation(), segmentBeginOffset, previousSentenceEndOffset);
 				segmentBeginOffset = currentSentenceBeginOffset;
 				
 			}
@@ -253,7 +253,7 @@ public class JTextTileAE extends TextSegmenterAE {
 			//for (int j=sentenceTokenStartIndex; j<sentenceTokenEndIndex; j++) line += (text.elementAt(j) + " ");
 			//System.out.println(line.trim());
 		}
-		AnnotationUtilities.createAnnotation(inputViewJCas, this.getOutputSegmentAnnotation(), segmentBeginOffset, sentenceVector.get(sentence.size()-1).getEnd());
+		AnnotationUtils.createAnnotation(inputViewJCas, this.getOutputSegmentAnnotation(), segmentBeginOffset, sentenceVector.get(sentence.size()-1).getEnd());
 		if (debug) {
 			System.out.println("Debug:==========");		
 		}
