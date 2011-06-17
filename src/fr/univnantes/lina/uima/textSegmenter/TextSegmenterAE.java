@@ -30,7 +30,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import fr.univnantes.lina.uima.textSegmenter.types.SegmentAnnotation;
 import fr.univnantes.lina.uima.util.AnalysisEngine;
-import fr.univnantes.lina.uima.util.UIMAUtilities;
+import fr.univnantes.lina.uima.util.UIMAUtils;
 
 
 import uk.ac.man.cs.choif.extend.Debugx;
@@ -212,7 +212,7 @@ public class TextSegmenterAE extends AnalysisEngine {
 	 */
 	public void initialize(UimaContext context) throws ResourceInitializationException {
 
-		// super
+		// generic AE parameters
 		super.initialize(context);
 
 		// current AE parameter

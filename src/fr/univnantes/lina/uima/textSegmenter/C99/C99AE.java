@@ -33,8 +33,8 @@ import fr.univnantes.lina.uima.textSegmenter.TextSegmenterAE;
 import fr.univnantes.lina.uima.textSegmenter.UIMARawText;
 import fr.univnantes.lina.uima.textSegmenter.types.SegmentAnnotation;
 import fr.univnantes.lina.uima.util.AnalysisEngine;
-import fr.univnantes.lina.uima.util.AnnotationUtilities;
-import fr.univnantes.lina.uima.util.UIMAUtilities;
+import fr.univnantes.lina.uima.util.AnnotationUtils;
+import fr.univnantes.lina.uima.util.UIMAUtils;
 
 
 import uk.ac.man.cs.choif.extend.Debugx;
@@ -199,7 +199,7 @@ public class C99AE extends TextSegmenterAE {
 					index++;
 				}
 			}
-			AnnotationUtilities.createAnnotation(inputViewJCas, this.getOutputSegmentAnnotation(), begin, sentenceVector.get(index-1).getEnd());
+			AnnotationUtils.createAnnotation(inputViewJCas, this.getOutputSegmentAnnotation(), begin, sentenceVector.get(index-1).getEnd());
 
 		}
 
