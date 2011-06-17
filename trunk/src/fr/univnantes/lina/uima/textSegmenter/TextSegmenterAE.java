@@ -69,7 +69,7 @@ public class TextSegmenterAE extends AnalysisEngine {
 	/**
 	 * Default token feature name
 	 */
-	private final static String TOKEN_FEATURE_NAME= "coveredText" ; //""; stem
+	private final static String DEFAULT_TOKEN_FEATURE_NAME= "coveredText" ; //""; stem
 
 
 	/**
@@ -223,8 +223,16 @@ public class TextSegmenterAE extends AnalysisEngine {
 			if (stringParameter != null) this.setTokenAnnotationType(stringParameter);
 
 			String tokenFeatureName = (String) context.getConfigParameterValue(INPUT_WORD_FEATURE_ANNOTATION_PARAM);
-			if (stringParameter != null) { this.setTokenFeature(tokenFeatureName);} else
-			{this.setTokenFeature(TOKEN_FEATURE_NAME);}
+			if (stringParameter != null) { 
+				System.out.println("Debug: setTokenFeature with PARAMETER VALUE "+ tokenFeatureName);
+				this.setTokenFeature(tokenFeatureName);
+				} 
+			else{
+				System.out.println("Debug: setTokenFeature with DEFAULT "+ DEFAULT_TOKEN_FEATURE_NAME);
+				this.setTokenFeature(DEFAULT_TOKEN_FEATURE_NAME);
+				}
+			
+			System.out.println("Debug: getTokenFeature() "+this.getTokenFeature());
 
 			String outputSegmentAnnotation = (String) context.getConfigParameterValue(OUTPUT_SEGMENT_ANNOTATION_PARAM);
 			if (outputSegmentAnnotation != null) { this.setOutputSegmentAnnotation(outputSegmentAnnotation);} else

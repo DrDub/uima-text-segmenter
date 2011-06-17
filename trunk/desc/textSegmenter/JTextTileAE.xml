@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<?xml version="1.0" encoding="UTF-8"?><analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
   <primitive>true</primitive>
   <annotatorImplementationName>fr.univnantes.lina.uima.textSegmenter.JTextTile.JTextTileAE</annotatorImplementationName>
@@ -19,8 +18,7 @@
       <configurationParameter>
         <name>WindowSize</name>
         <description>Window size in number of words. Hearst suggested 30. Choi claimed  the same but its default value was 100 in its implementation. It depends on the number of words per sentence/proposition and also if we words with raw words, post tag filtered words, stems... and from the text genre...
-Set it to -1 if you want the program to determine automatically the "best" value. The computation is based on  simple homemade empirical heuristic which set the best value to 3 times the average size of a sentence in terms of words.
-</description>
+Set it to -1 if you want the program to determine automatically the "best" value. The computation is based on  simple homemade empirical heuristic which set the best value to 3 times the average size of a sentence in terms of words.</description>
         <type>Integer</type>
         <multiValued>false</multiValued>
         <mandatory>true</mandatory>

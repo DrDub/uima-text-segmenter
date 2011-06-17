@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<?xml version="1.0" encoding="UTF-8"?><analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
   <primitive>false</primitive>
   <delegateAnalysisEngineSpecifiers>
@@ -9,11 +8,11 @@
     <delegateAnalysisEngine key="C99AE">
       <import name="textSegmenter.C99AE"/>
     </delegateAnalysisEngine>
-    <delegateAnalysisEngine key="JTextTileAE">
-      <import name="textSegmenter.JTextTileAE"/>
-    </delegateAnalysisEngine>
     <delegateAnalysisEngine key="WhitespaceTokenizer">
       <import name="WhitespaceTokenizer"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="JTextTileAE">
+      <import name="textSegmenter.JTextTileAE"/>
     </delegateAnalysisEngine>
   </delegateAnalysisEngineSpecifiers>
   <analysisEngineMetaData>
@@ -28,6 +27,7 @@
         <node>WhitespaceTokenizer</node>
         <node>SnowballAnnotator</node>
         <node>JTextTileAE</node>
+        <node>C99AE</node>
       </fixedFlow>
     </flowConstraints>
     <fsIndexCollection/>
