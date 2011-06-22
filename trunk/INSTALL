@@ -99,6 +99,8 @@ RUN INSTRUCTIONS
   	* More generally to define your parameters values, override the component parameters 
   	in your aggregate (see the Parameter tabs of your descriptor file). Consult the 
   	`parameters` section below to help you to define correct values. 
+  	
+  	If you do not want to use a stopword list then you have to specify an empty file anyway.
 
 	
 EXAMPLES
@@ -135,6 +137,10 @@ INSTALLATION PROBLEMS
 	desc/textSegmenter/TextSegmenterTS.xml, puis un remove/add desc as build source 
 	et a la mano build project. A l'aide du navigator, vérifiez vous devez avoir 
 	dans le bin les répertoires suivants : fr (avec un sous répertoire types), uk, 
+	
+	If you use default values for the `WindowSize` and the `StepSize Size` 
+	parameters, the size of the texts you analyze should be 'great enough'.
+	See the parameters information below.
 	
 	
 PARAMETERS
