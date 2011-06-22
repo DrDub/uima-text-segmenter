@@ -21,7 +21,10 @@
 # Fichier ChangeLog
 # 2011-02-28  Nicolas Hernandez  <nicolas.hernandez@gmail.com>
 
-2011-06-17  Nicolas Hernandez  <nicolas.hernandez@gmail.com> commited
+2011-06-17  Nicolas Hernandez  <nicolas.hernandez@gmail.com> committed
+  * resources/stopWords-emptyList.csv: added 
+
+2011-06-17  Nicolas Hernandez  <nicolas.hernandez@gmail.com> committed
   * add INSTALL file and refactor the README file and modifications comming from uima-common + add some stopwords files
   
 2011-04-29  Nicolas Hernandez  <nicolas.hernandez@gmail.com> not tagged
