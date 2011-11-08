@@ -28,9 +28,10 @@ import org.apache.uima.cas.FSIterator;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
+
+import fr.univnantes.lina.uima.common.CommonAE;
+import fr.univnantes.lina.uima.common.UIMAUtils;
 import fr.univnantes.lina.uima.textSegmenter.types.SegmentAnnotation;
-import fr.univnantes.lina.uima.util.AnalysisEngine;
-import fr.univnantes.lina.uima.util.UIMAUtils;
 
 
 import uk.ac.man.cs.choif.extend.Debugx;
@@ -45,7 +46,7 @@ import java.io.File;
  * @author hernandez 
  *
  */
-public class TextSegmenterAE extends AnalysisEngine {
+public class TextSegmenterAE extends CommonAE {
 	
 	/*
 	 * Properties param and default values 

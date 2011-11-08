@@ -29,13 +29,13 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import fr.univnantes.lina.uima.common.AnnotationUtils;
+import fr.univnantes.lina.uima.common.CommonAE;
+import fr.univnantes.lina.uima.common.UIMAUtils;
 import fr.univnantes.lina.uima.textSegmenter.TextSegmenterAE;
 import fr.univnantes.lina.uima.textSegmenter.UIMARawText;
 import fr.univnantes.lina.uima.textSegmenter.C99.C99Parser;
 import fr.univnantes.lina.uima.textSegmenter.types.SegmentAnnotation;
-import fr.univnantes.lina.uima.util.AnalysisEngine;
-import fr.univnantes.lina.uima.util.AnnotationUtils;
-import fr.univnantes.lina.uima.util.UIMAUtils;
 
 
 import uk.ac.man.cs.choif.extend.Debugx;

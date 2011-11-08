@@ -40,9 +40,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import fr.univnantes.lina.uima.common.UIMAUtils;
 import fr.univnantes.lina.uima.textSegmenter.UIMARawText;
 import fr.univnantes.lina.uima.textSegmenter.C99.C99LINA;
-import fr.univnantes.lina.uima.util.UIMAUtils;
 
 import uk.ac.man.cs.choif.extend.structure.ContextVector;
 import uk.ac.man.cs.choif.nlp.surface.Punctuation;
