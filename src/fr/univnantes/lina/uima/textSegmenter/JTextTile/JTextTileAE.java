@@ -53,21 +53,25 @@ import java.io.File;
  */
 public class JTextTileAE extends TextSegmenterAE {
 	
-	private Boolean debug = true;
+	private Boolean debug = false;
 
 	/*
-	 * Properties
+	 * PARAMETER
 	 */
 
 	private final static String WINDOW_PARAM = "WindowSize";
 	private final static String STEP_PARAM = "StepSize";
 	
-
+	/*
+	 * DEFAULT VALUE
+	 */
+	private final static int WINDOW_DEFAULT = -1;
+	private final static int STEP_DEFAULT = -1 ;
 	
 	/**
 	 * 
 	 */
-	private String tokenFeature ;
+	//private String tokenFeature ;
 	
 	private int windowSize;
 	
@@ -112,9 +116,9 @@ public class JTextTileAE extends TextSegmenterAE {
 	/**
 	 * @return the tokenFeature
 	 */
-	protected String getTokenFeature() {
-		return tokenFeature;
-	}
+	//protected String getTokenFeature() {
+	//	return tokenFeature;
+	//}
 
 	/**
 	 * @param tokenFeature the tokenFeature to set
@@ -144,8 +148,10 @@ public class JTextTileAE extends TextSegmenterAE {
 		try {
 
 			Integer w = (Integer) context.getConfigParameterValue(WINDOW_PARAM);
+			if (w == null) w =WINDOW_DEFAULT;
 			this.setWindow(w);
 			Integer s = (Integer) context.getConfigParameterValue(STEP_PARAM);
+			if (s == null) s = STEP_DEFAULT;
 			this.setStep(s);
 
 		} catch (Exception e) {

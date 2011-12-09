@@ -12,7 +12,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** Default text segmentation annotation
- * Updated by JCasGen Sun Mar 13 08:13:47 CET 2011
+ * Updated by JCasGen Fri Dec 09 17:21:14 CET 2011
  * @generated */
 public class SegmentAnnotation_Type extends Annotation_Type {
   /** @generated */
