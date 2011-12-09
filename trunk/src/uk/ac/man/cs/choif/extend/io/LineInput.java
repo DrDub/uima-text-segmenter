@@ -12,6 +12,7 @@ import uk.ac.man.cs.choif.extend.*;
 public class LineInput implements Enumeration {
 	private BufferedReader in;
 	private String textLine = null;
+	
 public LineInput(File file) throws IOException {
 	byte[] data = new byte[(int) file.length()];
 	InputStream bin = new FileInputStream(file);

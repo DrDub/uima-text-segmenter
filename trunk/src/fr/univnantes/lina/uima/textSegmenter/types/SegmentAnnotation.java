@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** Default text segmentation annotation
- * Updated by JCasGen Sun Mar 13 08:13:47 CET 2011
+ * Updated by JCasGen Fri Dec 09 17:21:14 CET 2011
  * XML source: /media/MyPassport/current/public/research/UIMA-USER-DEV-ENV/workspace/uima-text-segmenter/desc/textSegmenter/TextSegmenterTS.xml
  * @generated */
 public class SegmentAnnotation extends Annotation {

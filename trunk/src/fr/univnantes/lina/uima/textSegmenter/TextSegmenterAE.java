@@ -20,6 +20,7 @@ package fr.univnantes.lina.uima.textSegmenter;
  */
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Vector;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
@@ -47,7 +48,7 @@ import java.io.File;
  *
  */
 public class TextSegmenterAE extends CommonAE {
-	
+
 	/*
 	 * Properties param and default values 
 	 */
@@ -56,7 +57,7 @@ public class TextSegmenterAE extends CommonAE {
 	private final static String INPUT_WORD_FEATURE_ANNOTATION_PARAM = "InputWordFeature";
 	private final static String OUTPUT_SEGMENT_ANNOTATION_PARAM = "OutputSegmentAnnotation";
 	private final static String STOPWORDFILE_PARAM = "StopWordFile";
-	
+
 	/**
 	 * Default sentence annotation type value 
 	 */
@@ -82,42 +83,42 @@ public class TextSegmenterAE extends CommonAE {
 	/*
 	 * 
 	 */
-	
-	/**
-	 * 
-	 */
-	private String sentenceAnnotationType = SENTENCE_TYPE;
 
-	
-	
-	private String tokenAnnotationType = TOKEN_TYPE;
 	/**
 	 * 
 	 */
-	private String tokenFeature ;
-	
+	protected String sentenceAnnotationType = SENTENCE_TYPE;
+
+
+
+	protected String tokenAnnotationType = TOKEN_TYPE;
 	/**
 	 * 
 	 */
-	private String outputSegmentAnnotation;
-	
-	
+	protected String tokenFeature ;
+
 	/**
 	 * 
 	 */
-	private Stopword stopWord;
+	protected String outputSegmentAnnotation;
+
+
+	/**
+	 * 
+	 */
+	protected Stopword stopWord;
 
 	/*
 	 * Text segmenter specificities
 	 */
-	
 
-	
+
+
 	/*
 	 * Accessors
 	 */
 
-	
+
 	/**
 	 * @return the sentenceAnnotationType
 	 */
@@ -179,8 +180,13 @@ public class TextSegmenterAE extends CommonAE {
 	}
 
 	protected void setStopWord(String path) throws Exception {
-		File file = new File(path);
-		this.setStopWord(file);
+		// if a stop word path have been set
+		if (path != null) {
+			File file = new File(path);
+			this.setStopWord(file);
+		}
+		// if not (it means an empty list)
+		else this.stopWord = (Stopword) new Hashtable();
 	}
 
 	protected Stopword getStopWord() {
@@ -202,12 +208,12 @@ public class TextSegmenterAE extends CommonAE {
 		this.tokenFeature = tokenFeature;
 	}
 
-	
-	
+
+
 	/*
 	 * Methods 
 	 */
-	
+
 	/**
 	 * Get the parameter values
 	 */
@@ -218,29 +224,32 @@ public class TextSegmenterAE extends CommonAE {
 
 		// current AE parameter
 		try {
-			String stringParameter = (String) context.getConfigParameterValue(INPUT_SENTENCE_ANNOTATION_PARAM);
-			if (stringParameter != null) this.setSentenceAnnotationType(stringParameter);
-			stringParameter = (String) context.getConfigParameterValue(INPUT_WORD_ANNOTATION_PARAM);
-			if (stringParameter != null) this.setTokenAnnotationType(stringParameter);
+			String sentenceParam = (String) context.getConfigParameterValue(INPUT_SENTENCE_ANNOTATION_PARAM);
+			if (sentenceParam != null) this.setSentenceAnnotationType(sentenceParam);
+			String wordParam = (String) context.getConfigParameterValue(INPUT_WORD_ANNOTATION_PARAM);
+			if (wordParam != null) this.setTokenAnnotationType(wordParam);
 
 			String tokenFeatureName = (String) context.getConfigParameterValue(INPUT_WORD_FEATURE_ANNOTATION_PARAM);
-			if (stringParameter != null) { 
+			if (wordParam != null) { 
 				//System.out.println("Debug: setTokenFeature with PARAMETER VALUE "+ tokenFeatureName);
 				this.setTokenFeature(tokenFeatureName);
-				} 
+				//System.out.println("Debug: tokenFeatureName"+ tokenFeatureName);
+			} 
 			else{
 				//System.out.println("Debug: setTokenFeature with DEFAULT "+ DEFAULT_TOKEN_FEATURE_NAME);
 				this.setTokenFeature(DEFAULT_TOKEN_FEATURE_NAME);
-				}
-			
+				//System.out.println("Debug: tokenFeatureName = DEFAULT_TOKEN_FEATURE_NAME "+ DEFAULT_TOKEN_FEATURE_NAME);
+
+			}
+
 			//System.out.println("Debug: getTokenFeature() "+this.getTokenFeature());
 
 			String outputSegmentAnnotation = (String) context.getConfigParameterValue(OUTPUT_SEGMENT_ANNOTATION_PARAM);
 			if (outputSegmentAnnotation != null) { this.setOutputSegmentAnnotation(outputSegmentAnnotation);} else
 			{this.setOutputSegmentAnnotation(SEGMENT_TYPE);}
 
-			String path = (String) context.getConfigParameterValue(STOPWORDFILE_PARAM);
-			this.setStopWord(path);
+			String stopWordPath = (String) context.getConfigParameterValue(STOPWORDFILE_PARAM);
+			this.setStopWord(stopWordPath);
 
 		} catch (Exception e) {
 			throw new ResourceInitializationException(e);

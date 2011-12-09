@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<?xml version="1.0" encoding="UTF-8"?>
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
   <primitive>true</primitive>
   <annotatorImplementationName>fr.univnantes.lina.uima.textSegmenter.JTextTile.JTextTileAE</annotatorImplementationName>
@@ -13,7 +14,7 @@
         <description>Path to the stop word file. If empty no use ? Must be specified ?</description>
         <type>String</type>
         <multiValued>false</multiValued>
-        <mandatory>true</mandatory>
+        <mandatory>false</mandatory>
       </configurationParameter>
       <configurationParameter>
         <name>WindowSize</name>
@@ -21,7 +22,7 @@
 Set it to -1 if you want the program to determine automatically the "best" value. The computation is based on  simple homemade empirical heuristic which set the best value to 3 times the average size of a sentence in terms of words.</description>
         <type>Integer</type>
         <multiValued>false</multiValued>
-        <mandatory>true</mandatory>
+        <mandatory>false</mandatory>
       </configurationParameter>
       <configurationParameter>
         <name>StepSize</name>
@@ -29,7 +30,7 @@ Set it to -1 if you want the program to determine automatically the "best" value
 Set it to -1 if you want the program to determine automatically the "best" value. The computation is based on  simple homemade empirical heuristic which set the best value to 1 time the average size of a sentence in terms of words.</description>
         <type>Integer</type>
         <multiValued>false</multiValued>
-        <mandatory>true</mandatory>
+        <mandatory>false</mandatory>
       </configurationParameter>
       <configurationParameter>
         <name>InputView</name>
@@ -69,45 +70,9 @@ Set it to -1 if you want the program to determine automatically the "best" value
     </configurationParameters>
     <configurationParameterSettings>
       <nameValuePair>
-        <name>StopWordFile</name>
-        <value>
-          <string>resources/STOPWORD.list</string>
-        </value>
-      </nameValuePair>
-      <nameValuePair>
-        <name>InputSentenceAnnotation</name>
-        <value>
-          <string>org.apache.uima.SentenceAnnotation</string>
-        </value>
-      </nameValuePair>
-      <nameValuePair>
         <name>OutputSegmentAnnotation</name>
         <value>
           <string>fr.univnantes.lina.uima.textSegmenter.types.JTextTileSegmentAnnotation</string>
-        </value>
-      </nameValuePair>
-      <nameValuePair>
-        <name>InputWordAnnotation</name>
-        <value>
-          <string>org.apache.uima.TokenAnnotation</string>
-        </value>
-      </nameValuePair>
-      <nameValuePair>
-        <name>InputWordFeature</name>
-        <value>
-          <string>stem</string>
-        </value>
-      </nameValuePair>
-      <nameValuePair>
-        <name>WindowSize</name>
-        <value>
-          <integer>-1</integer>
-        </value>
-      </nameValuePair>
-      <nameValuePair>
-        <name>StepSize</name>
-        <value>
-          <integer>-1</integer>
         </value>
       </nameValuePair>
     </configurationParameterSettings>
