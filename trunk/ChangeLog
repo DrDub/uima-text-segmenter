@@ -25,8 +25,8 @@
   * remove the contraint to set the stopword file parameter (should be set with empty file for an empty list)
   * default value set in the AE.java of JTextTile which leads to an empty desc (we removed the mandatory constraints for window and step)  
   * resources/stopWords* renamed respectively in  stopWords-en.txt  stopWords-fr.txt
+  * modify stdout : debug set to false in order not to display the segmentation in default output in JTextTileAE ; and Info average in UIMARawText
 
-  
 2011-06-17  Nicolas Hernandez  <nicolas.hernandez@gmail.com> committed
   * resources/stopWords-emptyList.csv: added 
 

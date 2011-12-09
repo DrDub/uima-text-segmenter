@@ -191,7 +191,7 @@ public class JTextTileAE extends TextSegmenterAE {
 
 		// A bit of error checking 
 		if (aJTextTileParsedText.getRawText().text.size() <= (this.getWindow() * 2)) {
-			System.out.println("Warning: Window size (" + this.getWindow() + " * 2 = " + (this.getWindow() * 2) + ") larger then collection (" + aJTextTileParsedText.getRawText().text.size() + "). Do not know the implications during the proceeding (may lead to a fatal error).");
+			System.err.println("Warning: Window size (" + this.getWindow() + " * 2 = " + (this.getWindow() * 2) + ") larger then collection (" + aJTextTileParsedText.getRawText().text.size() + "). Do not know the implications during the proceeding (may lead to a fatal error).");
 			//throw AnalysisEngineProcessException();
 		}
 

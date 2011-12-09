@@ -112,7 +112,7 @@ public class UIMARawText extends RawText {
 			
 		}
 		
-		System.out.println("Info: Average of words per sentence: " + text.size()/sentenceArrayOfTokenFeatureArray.length);
+		if (debug) System.out.println("Info: Average of words per sentence: " + text.size()/sentenceArrayOfTokenFeatureArray.length);
 	}
 
 	/**
