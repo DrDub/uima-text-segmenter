@@ -180,13 +180,17 @@ public class TextSegmenterAE extends CommonAE {
 	}
 
 	protected void setStopWord(String path) throws Exception {
+		File file ;
 		// if a stop word path have been set
 		if (path != null) {
-			File file = new File(path);
-			this.setStopWord(file);
-		}
+			file= new File(path);
+			
+		} 
+		else file = File.createTempFile(this.getClass().getName(), "tmp");
+		this.setStopWord(file);
 		// if not (it means an empty list)
-		else this.stopWord = (Stopword) new Hashtable();
+		//else this.stopWord = (fr.univnantes.lina.uima.textSegmenter.Stopword) new Hashtable();
+
 	}
 
 	protected Stopword getStopWord() {
