@@ -1,0 +1,1 @@
+http://code.google.com/p/uima-text-segmenter/source/browse/trunk/README

@@ -1,0 +1,1 @@
+Click here to consult the [the current version of the ChangeLog file](https://code.google.com/p/uima-text-segmenter/source/browse/trunk/ChangeLog)
